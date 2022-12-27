@@ -2,6 +2,7 @@ package br.com.swa.spring3web.services;
 
 import br.com.swa.spring3web.entities.User;
 import br.com.swa.spring3web.repositories.UserRepository;
+import br.com.swa.spring3web.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class UserService {
 
     public User findById(Long id){
         Optional<User> obj = userRepository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User insert(User obj){
