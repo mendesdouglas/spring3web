@@ -1,8 +1,11 @@
 package br.com.swa.spring3web.entities;
 
+
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -16,6 +19,10 @@ public class User implements Serializable {
     private Long id;
     private String name;
     private String email, phone, password;
+
+    @Transient
+    @OneToMany(mappedBy = "client")
+    private final List<Order> orders=new ArrayList<>();
 
     public User() {
     }
@@ -66,6 +73,10 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     @Override
