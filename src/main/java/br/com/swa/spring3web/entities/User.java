@@ -1,6 +1,7 @@
 package br.com.swa.spring3web.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -20,6 +21,7 @@ public class User implements Serializable {
     private String name;
     private String email, phone, password;
 
+    @JsonIgnore
     @Transient
     @OneToMany(mappedBy = "client")
     private final List<Order> orders=new ArrayList<>();
